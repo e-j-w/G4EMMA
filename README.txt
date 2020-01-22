@@ -1,5 +1,7 @@
-To make and build, simply run the script cmake_script.sh
-./cmake_script.sh
+To build, run:
+
+cmake -DGeant4_DIR=/path/to/geant4/installation/ /path/to/G4EMMA
+make
 
 
 Some nominal values for EMMA: 

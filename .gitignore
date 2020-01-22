@@ -19,3 +19,5 @@ G4EMMA-build/*
 *.swp
 /UserDir/UserInput/energySpectrum.dat
 /save_data.sh.save
+*.root
+*.dat
