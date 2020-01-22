@@ -241,8 +241,8 @@ void EMMAHadronPhysics::ConstructProcess()
    G4ProtonInelasticProcess* theProtonInelasticProcess 
      = new G4ProtonInelasticProcess(); 
 
-   G4RPGProtonInelastic* theProtonModel = new G4RPGProtonInelastic();
-   theProtonInelasticProcess->RegisterMe(theProtonModel);
+   //G4RPGProtonInelastic* theProtonModel = new G4RPGProtonInelastic();
+   //theProtonInelasticProcess->RegisterMe(theProtonModel);
    /*G4LEProtonInelastic* theProtonLEPModel = new G4LEProtonInelastic();
    G4HEProtonInelastic* theProtonHEPModel = new G4HEProtonInelastic();
    theProtonInelasticProcess->RegisterMe(theProtonLEPModel);
@@ -315,8 +315,8 @@ void EMMAHadronPhysics::ConstructProcess()
    G4NeutronInelasticProcess* theNeutronInelasticProcess 
      = new G4NeutronInelasticProcess(); 
 
-   G4RPGNeutronInelastic* theNeutronModel = new G4RPGNeutronInelastic();
-   theNeutronInelasticProcess->RegisterMe(theNeutronModel);
+   //G4RPGNeutronInelastic* theNeutronModel = new G4RPGNeutronInelastic();
+   //theNeutronInelasticProcess->RegisterMe(theNeutronModel);
    /*G4LENeutronInelastic* theNeutronLEPModel = new G4LENeutronInelastic();
    G4HENeutronInelastic* theNeutronHEPModel = new G4HENeutronInelastic();
    theNeutronInelasticProcess->RegisterMe(theNeutronLEPModel);

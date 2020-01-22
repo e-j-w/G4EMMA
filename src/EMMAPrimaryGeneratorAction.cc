@@ -229,7 +229,7 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   // this is to update target thickness
   // <><><><><><><><><><><><><><><><><><><><> //
   depth = targetThickness * randNumb;
-  G4VSolid* targetSolid = new G4Box("target",5.*cm,5.*cm,depth/2.0);
+  G4VSolid* targetSolid = new G4Box("target",5.*CLHEP::cm,5.*CLHEP::cm,depth/2.0);
   G4LogicalVolumeStore* logVolStore = G4LogicalVolumeStore::GetInstance();
   G4LogicalVolume* target = logVolStore->GetVolume("targetLogical",true); //"targetLogical" declared in DetectorConstruction
   target->SetSolid(targetSolid);
