@@ -22,8 +22,8 @@ BGField5::BGField5(G4double xoffset, G4double zoffset,G4double zbefore,G4double 
   data[1] = 1;
   data[2] = 1;
   data[3] = 1;
-  data[10] = zbefore/cm; //drift length before quad
-  data[11] = zafter/cm; //drift length after quad
+  data[10] = zbefore/CLHEP::cm; //drift length before quad
+  data[11] = zafter/CLHEP::cm; //drift length after quad
   data[12] = 12.5;
   data[13] = 500; //radius of ED in cm
   data[14] = FieldStrength_0;
@@ -40,9 +40,9 @@ BGField5::BGField5(G4double xoffset, G4double zoffset,G4double zbefore,G4double 
   data[35] = 1.8639;
   data[36] = -0.5572;
   data[37] = 0.3904;
-  offset[0] = xoffset/cm; // x-coord. of beginning of field wrt world logical volume
+  offset[0] = xoffset/CLHEP::cm; // x-coord. of beginning of field wrt world logical volume
   offset[1] = 0;
-  offset[2] = zoffset/cm; // z-coord. of beginning of field wrt world logical volume
+  offset[2] = zoffset/CLHEP::cm; // z-coord. of beginning of field wrt world logical volume
 }
 
 BGField5::~BGField5()
@@ -52,9 +52,9 @@ void BGField5::AddFieldValue(const double Point[3],G4double field[6]) const
 {
 	double pos[3], pos2[3];
 	
-	pos2[0] = Point[0]/cm - offset[0];
-	pos2[1] = Point[1]/cm - offset[1];
-	pos2[2] = Point[2]/cm - offset[2];
+	pos2[0] = Point[0]/CLHEP::cm - offset[0];
+	pos2[1] = Point[1]/CLHEP::cm - offset[1];
+	pos2[2] = Point[2]/CLHEP::cm - offset[2];
 	// Rotate the position to the reference frame of the element.  These are counter clockwise rotations
 	pos[0] = cos(Pi/180*340)*pos2[0] + sin(Pi/180*340)*pos2[2];
         pos[1] = pos2[1];
@@ -78,9 +78,9 @@ void BGField5::AddFieldValue(const double Point[3],G4double field[6]) const
 	Efield2[2] = sin(Pi/180*340)*Efield[0] + cos(Pi/180*340)*Efield[2];
 	
 
-	Efield2[0] *= kilovolt/cm;
-	Efield2[1] *= kilovolt/cm;
-	Efield2[2] *= kilovolt/cm;
+	Efield2[0] *= CLHEP::kilovolt/CLHEP::cm;
+	Efield2[1] *= CLHEP::kilovolt/CLHEP::cm;
+	Efield2[2] *= CLHEP::kilovolt/CLHEP::cm;
 
 	// scale Efield (work-around solution to keep charge state fixed)
 	if (currentCharge!=0.0) {

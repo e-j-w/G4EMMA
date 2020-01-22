@@ -85,15 +85,11 @@ EMMAPrimaryGeneratorAction::EMMAPrimaryGeneratorAction()  // constructor
 
 	G4int n_particle = 1;
 	//G4ParticleGun class generates primary particle(s) with a given momentum and position
-<<<<<<< HEAD
-	particleGun  = new G4ParticleGun(n_particle);
-=======
 	particleGun = new G4ParticleGun(n_particle);
 
 	// Experimental!
 	//GPSparticleGun = new G4GeneralParticleSource();
 	// Experimantal!
->>>>>>> 328d247d31d8d865b2def4e9637587fef9e7941b
 
 	//create a messenger for this class
 	gunMessenger = new EMMAPrimaryGeneratorMessenger(this);
@@ -150,10 +146,7 @@ EMMAPrimaryGeneratorAction::EMMAPrimaryGeneratorAction()  // constructor
 EMMAPrimaryGeneratorAction::~EMMAPrimaryGeneratorAction()
 {
   delete particleGun;	//must delete G4ParticleGun
-<<<<<<< HEAD
-=======
 	//delete GPSparticleGun; // experimental!
->>>>>>> 328d247d31d8d865b2def4e9637587fef9e7941b
   delete gunMessenger;
 }
 
@@ -245,10 +238,6 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
   G4double Ekin;
   G4ParticleDefinition* particleDef;
-<<<<<<< HEAD
-
-=======
->>>>>>> 328d247d31d8d865b2def4e9637587fef9e7941b
 
   // to simulate just an isotropic alpha source
   if (useAlphaSource) {	//boolean determined from alphaSource.dat input file
@@ -292,18 +281,6 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     particleGun->SetParticleCharge(userCharge);
 
     // Sample energy
-<<<<<<< HEAD
-    Ekin = energy;
-    if (sigmaEnergy>0.) { 
-      G4double mean = energy;
-      G4double FWHM = sigmaEnergy/100.*energy;
-      G4double std = FWHM/2.35; 
-      Ekin = CLHEP::RandGauss::shoot(mean,std);
-    }
-//---------------------------------------------------------------------------------------//
-    //energy including spread
-    particleGun->SetParticleEnergy(Ekin *MeV);
-=======
 		mean_energy = energy;
 		std_energy = (sigmaEnergy/100.*energy)/2.35;
 
@@ -335,7 +312,6 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 		//targetEkin = Ekin;
 		//G4cout << "The energy is " << Ekin << G4endl;
->>>>>>> 328d247d31d8d865b2def4e9637587fef9e7941b
     //fixed energy
     //particleGun->SetParticleEnergy(energy *MeV);
 //---------------------------------------------------------------------------------------//
@@ -370,11 +346,6 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       MaxAngle = transEmittance/(gamma*beta*rmax);
       MaxAngle = MaxAngle * 180./CLHEP::pi/1000. * deg; // mrad to deg conversion
     }
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> 328d247d31d8d865b2def4e9637587fef9e7941b
 	G4cout << "RADIUS: " << rmax/mm << " mm" << G4endl;
         G4cout << "ANGLE: " << MaxAngle/deg << " deg" << G4endl;
 
@@ -383,31 +354,6 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     G4double theta = 0.0*deg; G4double THETA = 0.0*deg;
     G4double phi = 0.0*deg;
 //---------------------------------------------------------------------------------------//
-<<<<<<< HEAD
-   
- //fixed angles  
-    x = sin(theta) * cos(phi);
-    y = sin(theta) * sin(phi);
-    z = cos(theta);
-
- //random angles
-    if (MaxAngle>0.) {
-      theta = G4UniformRand() * MaxAngle * sqrt(1.0-(r/rmax)*(r/rmax));
-      phi = G4UniformRand()*CLHEP::twopi;
-      THETA = Angle + theta*cos(phi);
-      x = sin(THETA); 
-      y = sin(theta) * sin(phi);
-      z = cos(THETA);
-    }
-
-    particleGun->SetParticleMomentumDirection(G4ThreeVector(x,y,z));
-    
-    G4cout<<"Prim.Gen.Action output "<<"Energy(MeV)= "<<energy <<" z emission location (mm) "
-          <<zemit/mm<< "Angle Offset (deg): "<< Angle/deg << " theta (deg)= "<< theta/deg <<" phi(deg)= "<< phi/deg << " THETA(deg)= "<< THETA/deg <<G4endl;
-
-    G4cout<<"Momentum Dir [x,y,z]: ["<< x <<","<< y << "," << z << "]" << G4endl;
-   
-=======
  //random angles
     if (MaxAngle>0.) {
 
@@ -448,7 +394,6 @@ these definitions for x, y, z are used. I've opted to use a much simpler version
 
     //G4cout<<"Momentum Dir [x,y,z]: ["<< x <<","<< y << "," << z << "]" << G4endl;
 
->>>>>>> 328d247d31d8d865b2def4e9637587fef9e7941b
 
 //---------------------------------------------------------------------------------------//
   }
@@ -458,11 +403,7 @@ these definitions for x, y, z are used. I've opted to use a much simpler version
   else if (simulateReaction) {
     G4int id=anEvent->GetEventID();
     Ekin = energyBeam[id]; //from initializeReactionSimulation()
-<<<<<<< HEAD
-    G4ThreeVector dir(dirxBeam[id],diryBeam[id],dirzBeam[id]);	  
-=======
     G4ThreeVector dir(dirxBeam[id],diryBeam[id],dirzBeam[id]);
->>>>>>> 328d247d31d8d865b2def4e9637587fef9e7941b
     if (fZ1==0.) {
       G4cout << "ERROR: Two-body reaction not defined" << G4endl;
       exit (EXIT_FAILURE);
@@ -480,15 +421,6 @@ these definitions for x, y, z are used. I've opted to use a much simpler version
     G4double dz=depth/2.;
     z = z-dz; // correction needed because target placement refers to center of target ...
     particleGun->SetParticlePosition(G4ThreeVector( x, y, z ));
-<<<<<<< HEAD
-    
-  }
-  
-  
-  particleGun->GeneratePrimaryVertex(anEvent);
-  
-  
-=======
 
   }
 
@@ -512,16 +444,11 @@ these definitions for x, y, z are used. I've opted to use a much simpler version
 	targetXdir = particleGun->GetParticleMomentumDirection().getX();
 	targetYdir = particleGun->GetParticleMomentumDirection().getY();
 	/*
->>>>>>> 328d247d31d8d865b2def4e9637587fef9e7941b
   // Print info:
   G4bool printInfo=true;
   G4double mass = particleDef->GetPDGMass();
   G4double pp = std::sqrt((Ekin + mass)*(Ekin + mass)-(mass*mass));
-<<<<<<< HEAD
-  G4double charge = particleGun->GetParticleCharge();	
-=======
   G4double charge = particleGun->GetParticleCharge();
->>>>>>> 328d247d31d8d865b2def4e9637587fef9e7941b
   mass = mass / 931.4940954;  // convert to amu
   if (printInfo) {
     G4cout << "\n Momentum " << pp << ", Mass " << mass << " amu, Ekin "
@@ -616,11 +543,7 @@ void EMMAPrimaryGeneratorAction::initializeBeamPreparation() // called using /my
 
 
 
-<<<<<<< HEAD
-void EMMAPrimaryGeneratorAction::simulateTwoBodyReaction( G4double &Ebeam, G4ThreeVector &dir ) 
-=======
 void EMMAPrimaryGeneratorAction::simulateTwoBodyReaction( G4double &Ebeam, G4ThreeVector &dir )
->>>>>>> 328d247d31d8d865b2def4e9637587fef9e7941b
 {
 
   // Z and A of projectile and target (1+2):
@@ -668,15 +591,9 @@ void EMMAPrimaryGeneratorAction::simulateTwoBodyReaction( G4double &Ebeam, G4Thr
   }
 
   // Compute c.m. energies and momentum of reaction products (3+4)
-<<<<<<< HEAD
-  G4double e3 = ( etot*etot + m3*m3 - m4*m4 ) / (2*etot); 
-  G4double e4 = etot - e3; 
-  G4double pcm = sqrt( e3*e3 - m3*m3 ); 
-=======
   G4double e3 = ( etot*etot + m3*m3 - m4*m4 ) / (2*etot);
   G4double e4 = etot - e3;
   G4double pcm = sqrt( e3*e3 - m3*m3 );
->>>>>>> 328d247d31d8d865b2def4e9637587fef9e7941b
 
   // Max and min angles
   G4double fqrmax = (180-fqmin/deg)*deg; //compute recoil c.m. angles from ejectile c.m. angles

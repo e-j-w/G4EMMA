@@ -83,9 +83,8 @@ EMMANuclearReactionProcess::PostStepDoIt(const G4Track& track,
 
 
   // Select element
-  G4Element* elm = 0;
   try {
-    elm = GetCrossSectionDataStore()->SampleZandA(dynParticle, material, *targNucleus);
+    GetCrossSectionDataStore()->SampleZandA(dynParticle, material, *targNucleus);
   }
   catch(G4HadronicException & aR) {
     G4ExceptionDescription ed;
@@ -94,6 +93,8 @@ EMMANuclearReactionProcess::PostStepDoIt(const G4Track& track,
     G4Exception("EMMANuclearReactionProcess::PostStepDoIt", "had003", FatalException, ed);
   }
 
+  // Initialize the hadronic projectile from the track
+  const G4HadProjectile theProj(track);
 
   /* 
      choses the interaction model depending on kinetic energy,
@@ -102,11 +103,11 @@ EMMANuclearReactionProcess::PostStepDoIt(const G4Track& track,
   */
   G4HadronicInteraction* hadi = 0;
   try {
-    hadi = ChooseHadronicInteraction( kineticEnergy, material, elm ); 
+    hadi = ChooseHadronicInteraction(theProj, *targNucleus, material, GetCrossSectionDataStore()->SampleZandA(dynParticle, material, *targNucleus) ); 
   }
   catch(G4HadronicException & aE) {
     G4ExceptionDescription ed;
-    ed << "Target element "<< elm->GetName()<<"  Z= " 
+    ed << "Target element "<< GetCrossSectionDataStore()->SampleZandA(dynParticle, material, *targNucleus)->GetName()<<"  Z= " 
        << targNucleus->GetZ_asInt() << "  A= " 
        << targNucleus->GetA_asInt() << G4endl;
     DumpState(track,"ChooseHadronicInteraction",ed);
@@ -118,10 +119,7 @@ EMMANuclearReactionProcess::PostStepDoIt(const G4Track& track,
 
   G4double tcut = 0.1*MeV; // low-energy cut for production of secondaries
   hadi->SetRecoilEnergyThreshold(tcut);
-
-
-  // Initialize the hadronic projectile from the track
-  G4HadProjectile theProj(track);
+  
   G4HadFinalState* result = 0;
   try {
     /* 
@@ -132,7 +130,7 @@ EMMANuclearReactionProcess::PostStepDoIt(const G4Track& track,
   catch(G4HadronicException aR) {
     G4ExceptionDescription ed;
     ed << "Call for " << hadi->GetModelName() << G4endl;
-    ed << "Target element "<< elm->GetName()<<"  Z= " 
+    ed << "Target element "<< GetCrossSectionDataStore()->SampleZandA(dynParticle, material, *targNucleus)->GetName()<<"  Z= " 
        << targNucleus->GetZ_asInt() 
        << "  A= " << targNucleus->GetA_asInt() << G4endl;
     DumpState(track,"ApplyYourself",ed);

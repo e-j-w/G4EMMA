@@ -234,17 +234,19 @@ void EMMAHadronPhysics::ConstructProcess()
    // add process
    G4HadronElasticProcess* thepElasticProcess 
      = new G4HadronElasticProcess();
-   G4LElastic* thepElasticModel = new G4LElastic();
+   G4HadronElastic* thepElasticModel = new G4HadronElastic();
    thepElasticProcess->RegisterMe(thepElasticModel);
    pManager->AddDiscreteProcess(thepElasticProcess);
 
    G4ProtonInelasticProcess* theProtonInelasticProcess 
      = new G4ProtonInelasticProcess(); 
 
-   G4LEProtonInelastic* theProtonLEPModel = new G4LEProtonInelastic();
+   G4RPGProtonInelastic* theProtonModel = new G4RPGProtonInelastic();
+   theProtonInelasticProcess->RegisterMe(theProtonModel);
+   /*G4LEProtonInelastic* theProtonLEPModel = new G4LEProtonInelastic();
    G4HEProtonInelastic* theProtonHEPModel = new G4HEProtonInelastic();
    theProtonInelasticProcess->RegisterMe(theProtonLEPModel);
-   theProtonInelasticProcess->RegisterMe(theProtonHEPModel);
+   theProtonInelasticProcess->RegisterMe(theProtonHEPModel);*/
    pManager->AddDiscreteProcess(theProtonInelasticProcess);
 
    G4VProcess* thepMultipleScattering = new G4hMultipleScattering();
@@ -306,17 +308,19 @@ void EMMAHadronPhysics::ConstructProcess()
    // add process
    G4HadronElasticProcess* thenElasticProcess 
      = new G4HadronElasticProcess();
-   G4LElastic* thenElasticModel = new G4LElastic();
+   G4HadronElastic* thenElasticModel = new G4HadronElastic();
    thenElasticProcess->RegisterMe(thenElasticModel);
    pManager->AddDiscreteProcess(thenElasticProcess);
 
    G4NeutronInelasticProcess* theNeutronInelasticProcess 
      = new G4NeutronInelasticProcess(); 
 
-   G4LENeutronInelastic* theNeutronLEPModel = new G4LENeutronInelastic();
+   G4RPGNeutronInelastic* theNeutronModel = new G4RPGNeutronInelastic();
+   theNeutronInelasticProcess->RegisterMe(theNeutronModel);
+   /*G4LENeutronInelastic* theNeutronLEPModel = new G4LENeutronInelastic();
    G4HENeutronInelastic* theNeutronHEPModel = new G4HENeutronInelastic();
    theNeutronInelasticProcess->RegisterMe(theNeutronLEPModel);
-   theNeutronInelasticProcess->RegisterMe(theNeutronHEPModel);
+   theNeutronInelasticProcess->RegisterMe(theNeutronHEPModel);*/
    pManager->AddDiscreteProcess(theNeutronInelasticProcess);
 
    G4HadronFissionProcess* thenFission
@@ -328,7 +332,7 @@ void EMMAHadronPhysics::ConstructProcess()
 
    G4HadronCaptureProcess* thenCapture
      = new G4HadronCaptureProcess();
-   G4LCapture* thenCaptureModel = new G4LCapture();
+   G4NeutronRadCapture* thenCaptureModel = new G4NeutronRadCapture();
    thenCapture->RegisterMe(thenCaptureModel);
    pManager->AddDiscreteProcess(thenCapture);
 

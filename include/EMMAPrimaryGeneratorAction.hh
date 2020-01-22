@@ -125,9 +125,6 @@ public:
   void GetPrimaryGeneratorActionParameters();
 
 
-<<<<<<< HEAD
-  void simulateTwoBodyReaction( G4double &Ebeam, G4ThreeVector &dir);
-=======
   void energyDistributionInit(G4String fileName);
   G4double energyDistribution();
 
@@ -140,7 +137,6 @@ public:
   void SetPhi(G4double val) {Phi = val;}
   G4double GetPhi() const {return Phi; }
   */
->>>>>>> 328d247d31d8d865b2def4e9637587fef9e7941b
 
   inline void SetBeamZ(G4double val) { beamZ = val; }
   inline G4double GetBeamZ() const { return beamZ; }

@@ -169,7 +169,7 @@ void EMMASteppingAction::UserSteppingAction(const G4Step* theStep)
 	std::ofstream beamFile(inTargetFileName, std::ios::app); //Declared in EMMAPrimaryGeneratorAction
 	beamFile.precision(17);
 	beamFile 
-	  << theKineticEnergy/MeV << " " 
+	  << theKineticEnergy/CLHEP::MeV << " " 
 	  //	  << worldPosition[0] << " " << worldPosition[1] << " " << worldPosition[2] << " "
 	  << worldPosition2[0] << " " << worldPosition2[1] << " " << worldPosition2[2]+dz << " "
 	  << MomentumDirection[0] << " " << MomentumDirection[1] << " " << MomentumDirection[2]
@@ -196,7 +196,7 @@ void EMMASteppingAction::UserSteppingAction(const G4Step* theStep)
 	G4double theta = std::acos( MomentumDirection[2]/dirn );
 	std::ofstream outfile(postTargetFileName, std::ios::app); //Declared in EMMAPrimaryGeneratorAction
 	outfile.precision(17);
-	outfile << theKineticEnergy/MeV << ", " << theta/deg << ", "
+	outfile << theKineticEnergy/CLHEP::MeV << ", " << theta/CLHEP::deg << ", "
 		<< worldPosition2[0] << ", " << worldPosition2[1] << G4endl;
 	outfile.close();
       }
@@ -220,7 +220,7 @@ void EMMASteppingAction::UserSteppingAction(const G4Step* theStep)
       G4double theta = std::acos( MomentumDirection[2]/dirn );
       std::ofstream outfile(postDegrader1FileName, std::ios::app); //Declared in EMMAPrimaryGeneratorAction
       outfile.precision(17);
-      outfile << theKineticEnergy/MeV << ", " << theta/deg << ", "
+      outfile << theKineticEnergy/CLHEP::MeV << ", " << theta/CLHEP::deg << ", "
 	      << worldPosition2[0] << ", " << worldPosition2[1] << G4endl;
       outfile.close();
     }
@@ -334,13 +334,13 @@ void EMMASteppingAction::UserSteppingAction(const G4Step* theStep)
     //calculate x and y location wrt optical axis
     
 //THE PLANE EQUATIONS NEED TO BE CALCULATED AGAIN!!!  
-    dplane1=-tan(20*deg)*worldPosition[0]+worldPosition[2];
-    dplane2=-tan(20*deg)*worldPosition2[0]+worldPosition2[2];
-    dx=worldPosition[0]+301.5370253*mm; //did calculations based on measurements in EMMA drawings
-    dz=worldPosition[2]-2783.48145*mm;
+    dplane1=-tan(20*CLHEP::deg)*worldPosition[0]+worldPosition[2];
+    dplane2=-tan(20*CLHEP::deg)*worldPosition2[0]+worldPosition2[2];
+    dx=worldPosition[0]+301.5370253*CLHEP::mm; //did calculations based on measurements in EMMA drawings
+    dz=worldPosition[2]-2783.48145*CLHEP::mm;
     xplane=sqrt(dx*dx+dz*dz);
     if(dx<0)xplane*=-1;
-    if(dplane1<2893.232*mm && dplane2>2893.232*mm){
+    if(dplane1<2893.232*CLHEP::mm && dplane2>2893.232*CLHEP::mm){
       //G4cout<<"ED1 exit position in WorldVolume: "<<G4BestUnit(worldPosition[0],"Length")<<", "
       //  <<G4BestUnit(worldPosition[1],"Length")<<G4endl;      
       G4cout<<"ED1 exit position wrt optical axis: "<<G4BestUnit(xplane,"Length")<<", "
@@ -364,7 +364,7 @@ void EMMASteppingAction::UserSteppingAction(const G4Step* theStep)
     }*/
   }
   if(name==element[4]){
-    if(worldPosition[2]<7479.86*mm && worldPosition2[2]>7479.86*mm){
+    if(worldPosition[2]<7479.86*CLHEP::mm && worldPosition2[2]>7479.86*CLHEP::mm){
       G4cout<<"ED2 exit position: "<<G4BestUnit(worldPosition[0],"Length")<<", "
         <<G4BestUnit(worldPosition[1],"Length")<<G4endl;      
     }

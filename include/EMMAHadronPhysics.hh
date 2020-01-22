@@ -71,11 +71,14 @@
 #include "G4AntiOmegaMinusInelasticProcess.hh"
 
 // Low energy models
-#include "G4LElastic.hh"
+#include "G4HadronElastic.hh"
 #include "G4LFission.hh"
-#include "G4LCapture.hh"
+#include "G4NeutronRadCapture.hh"
 
-#include "G4LEPionPlusInelastic.hh"
+#include "G4RPGProtonInelastic.hh"
+#include "G4RPGNeutronInelastic.hh"
+
+/*#include "G4LEPionPlusInelastic.hh"
 #include "G4LEPionMinusInelastic.hh"
 #include "G4LEKaonPlusInelastic.hh"
 #include "G4LEKaonZeroSInelastic.hh"
@@ -99,11 +102,11 @@
 #include "G4LETritonInelastic.hh"
 #include "G4LEAlphaInelastic.hh"
 #include "G4LEOmegaMinusInelastic.hh"
-#include "G4LEAntiOmegaMinusInelastic.hh"
+#include "G4LEAntiOmegaMinusInelastic.hh"*/
 
 // High-energy Models
 
-#include "G4HEPionPlusInelastic.hh"
+/*#include "G4HEPionPlusInelastic.hh"
 #include "G4HEPionMinusInelastic.hh"
 #include "G4HEKaonPlusInelastic.hh"
 #include "G4HEKaonZeroInelastic.hh"
@@ -124,11 +127,11 @@
 #include "G4HEAntiXiZeroInelastic.hh"
 #include "G4HEAntiXiMinusInelastic.hh"
 #include "G4HEOmegaMinusInelastic.hh"
-#include "G4HEAntiOmegaMinusInelastic.hh"
+#include "G4HEAntiOmegaMinusInelastic.hh"*/
 
 // Stopping processes
-#include "G4AntiProtonAnnihilationAtRest.hh"
-#include "G4AntiNeutronAnnihilationAtRest.hh"
+/*#include "G4AntiProtonAnnihilationAtRest.hh"
+#include "G4AntiNeutronAnnihilationAtRest.hh"*/
 
 class EMMAHadronPhysics : public G4VPhysicsConstructor
 {

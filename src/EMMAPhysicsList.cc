@@ -74,7 +74,7 @@ EMMAPhysicsList::EMMAPhysicsList():  G4VModularPhysicsList()
   // G4cout << "The StepLimit is set in EMMAGeneralPhysics.cc" << G4endl;
 
   // default cut value  (1.0mm)
-  defaultCutValue = 1.0*mm; //declared in G4VUserPhysicsList via G4VModularPhysicsList
+  defaultCutValue = 1.0*CLHEP::mm; //declared in G4VUserPhysicsList via G4VModularPhysicsList
   SetVerboseLevel(1); //This does NOTHING
 
   // General Physics ( Create ALL Particle and apply Decay )

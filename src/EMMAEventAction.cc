@@ -124,11 +124,6 @@ EMMAEventAction::EMMAEventAction()
   fp_hit2DEdep = new TH2F("hit2DEdep","Edep IC Front vs Back",160,0,40,160,0,40);
   fp_hit2DEdep->GetXaxis()->SetTitle("Edep Back (MeV)");
   fp_hit2DEdep->GetYaxis()->SetTitle("Edep Front (MeV)");
-<<<<<<< HEAD
-  
-=======
-
->>>>>>> 328d247d31d8d865b2def4e9637587fef9e7941b
   //call root tree and creates branches to store event by event data
   fp_tree = analysisManager->getfpRoottree();
   fp_tree->Branch("fp_posX",&fp_posX,"fp_posX/D");
@@ -140,9 +135,6 @@ EMMAEventAction::EMMAEventAction()
   fp_tree->Branch("fp_Edep2",&fp_Edep2,"fp_Edep2/D");
   fp_tree->Branch("fp_2DEdep",&fp_2DEdep,"fp_2DEdep/D");
   fp_tree->Branch("fp_EdepSilicon",&fp_Edep_Silicon,"fp_Edep_Silicon/D");
-<<<<<<< HEAD
-  
-=======
 
   fp_tree->Branch("target_posX",&target_posX,"target_posX/D");
   fp_tree->Branch("target_posY",&target_posY,"target_posY/D");
@@ -161,7 +153,6 @@ EMMAEventAction::EMMAEventAction()
   target_tree->Branch("target_xang",&target_xang,"target_xang/D");
   target_tree->Branch("target_yang",&target_yang,"target_yang/D");
 
->>>>>>> 328d247d31d8d865b2def4e9637587fef9e7941b
 #endif // G4ANALYSIS_USE
 }
 
@@ -196,11 +187,7 @@ EMMAEventAction::GetHitsCollection(const G4String& hcName,
 }
 
 void EMMAEventAction::PrintEventStatistics(
-<<<<<<< HEAD
-				G4double IonChamberEdep, G4double IonChamberTrackLength, 
-=======
 				G4double IonChamberEdep, G4double IonChamberTrackLength,
->>>>>>> 328d247d31d8d865b2def4e9637587fef9e7941b
 				G4double SiliconDetectorEdep, G4double SiliconDetectorTrackLength) const
 {
   // print event statistics
@@ -283,11 +270,7 @@ void EMMAEventAction::EndOfEventAction(const G4Event* event)
 
   EMMAIonChamberHit* IonChamberBackHit = (*IonChamberBackHC)[IonChamberBackHC->entries()-1];
 
-<<<<<<< HEAD
-  EMMAIonChamberHit* SiliconDetectorHit = (*SiliconDetectorHC)[SiliconDetectorHC->entries()-1];  // <<< I know. Don't judge me. 
-=======
   EMMAIonChamberHit* SiliconDetectorHit = (*SiliconDetectorHC)[SiliconDetectorHC->entries()-1];  // <<< I know. Don't judge me.
->>>>>>> 328d247d31d8d865b2def4e9637587fef9e7941b
 
   if(DHC2)
   {
@@ -306,32 +289,15 @@ void EMMAEventAction::EndOfEventAction(const G4Event* event)
       theta = aHit->GetTheta()/deg; //angle at focal place
 	    Ekin = aHit->GetEkin()/MeV;
 	    Edep = IonChamberFrontHit->GetEdep();
-<<<<<<< HEAD
-            Edep2 = IonChamberBackHit->GetEdep();
-	    EdepSilicon = SiliconDetectorHit->GetEdep();
-            if (fp_hitpos) fp_hitpos->Fill(localPos.x()/mm, localPos.y()/mm); //fill histogram
-=======
       Edep2 = IonChamberBackHit->GetEdep();
 	    EdepSilicon = SiliconDetectorHit->GetEdep();
 
       if (fp_hitpos) fp_hitpos->Fill(localPos.x()/mm, localPos.y()/mm); //fill histogram
->>>>>>> 328d247d31d8d865b2def4e9637587fef9e7941b
 	    if (fp_hitposX) fp_hitposX->Fill(localPos.x()/mm);
       if (fp_hitangle) fp_hitangle->Fill(theta); //fill histogram
 	    if (fp_hitEkin) fp_hitEkin->Fill(Ekin);
 	    if (fp_hitEdep) fp_hitEdep->Fill(Edep);
 	    if (fp_hitEdep2) fp_hitEdep2->Fill(Edep2);
-<<<<<<< HEAD
-            if (fp_hitEdep_Silicon) fp_hitEdep_Silicon->Fill(EdepSilicon);
-	    if (fp_hit2DEdep) fp_hit2DEdep->Fill(Edep,Edep2);
-            if (fp_tree){ //fill branch with position and angle for each event
-              fp_pos[0]=localPos.x()/mm;
-              fp_pos[1]=localPos.y()/mm;
-              fp_theta=theta;
-	      fp_Edep=Edep;
-	      fp_Edep2=Edep2;
-	      fp_Edep_Silicon = EdepSilicon;
-=======
       if (fp_hitEdep_Silicon) fp_hitEdep_Silicon->Fill(EdepSilicon);
 	    if (fp_hit2DEdep) fp_hit2DEdep->Fill(Edep,Edep2);
       if (fp_tree){                     //fill branch with position and angle for each event
@@ -346,7 +312,6 @@ void EMMAEventAction::EndOfEventAction(const G4Event* event)
               target_angX = x_angle;
               target_angY = y_angle;
               target_Ekin_tree = EMMAPrimaryGeneratorAction::targetEkin;
->>>>>>> 328d247d31d8d865b2def4e9637587fef9e7941b
               fp_tree->Fill();
 
 		PrintEventStatistics(IonChamberBackHit->GetEdep(), IonChamberBackHit->GetTrackLength(), SiliconDetectorHit->GetEdep(), SiliconDetectorHit->GetTrackLength());

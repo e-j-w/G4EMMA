@@ -54,12 +54,13 @@
 #include "G4EmProcessOptions.hh"
 #include "G4IonParametrisedLossModel.hh"
 #include "G4NuclearStopping.hh"
-#include "G4UrbanMscModel90.hh"
-#include "G4UrbanMscModel95.hh"
+#include "G4UrbanMscModel.hh"
+//#include "G4UrbanMscModel90.hh"
+//#include "G4UrbanMscModel95.hh"
 #include "G4WentzelVIModel.hh"
 #include "G4CoulombScattering.hh"
 #include "G4IonCoulombScatteringModel.hh"
-#include "G4ScreenedNuclearRecoil.hh"
+//#include "G4ScreenedNuclearRecoil.hh"
 #include "EMMAIonPhysicsMessenger.hh"
 
 
@@ -90,7 +91,7 @@ void EMMAIonPhysics::ConstructProcess()
 
 
    G4hMultipleScattering* thegionMultipleScattering = new G4hMultipleScattering();
-   thegionMultipleScattering->SetEmModel(new G4UrbanMscModel90());
+   thegionMultipleScattering->SetEmModel(new G4UrbanMscModel());
    //   thegionMultipleScattering->SetEmModel(new G4WentzelVIModel());
    pManager->AddProcess(thegionMultipleScattering);
    pManager->SetProcessOrdering(thegionMultipleScattering, idxAlongStep,1);
@@ -98,7 +99,7 @@ void EMMAIonPhysics::ConstructProcess()
 
    G4ionIonisation* thegionIonisation = new G4ionIonisation();
    //   thegionIonisation->SetEmModel(new G4IonParametrisedLossModel());
-   thegionIonisation->SetStepFunction(0.01, 0.01*um);
+   thegionIonisation->SetStepFunction(0.01, 0.01*CLHEP::um);
    pManager->AddProcess(thegionIonisation);
    pManager->SetProcessOrdering(thegionIonisation, idxAlongStep,2);
    pManager->SetProcessOrdering(thegionIonisation, idxPostStep,2);
@@ -127,14 +128,14 @@ void EMMAIonPhysics::ConstructProcess()
 
    // add processes
    G4HadronElasticProcess* thedueElasticProcess = new G4HadronElasticProcess();
-   G4LElastic* thedueElasticModel = new G4LElastic();
+   G4HadronElastic* thedueElasticModel = new G4HadronElastic();
    thedueElasticProcess->RegisterMe(thedueElasticModel);
    pManager->AddDiscreteProcess(thedueElasticProcess);
 
    G4DeuteronInelasticProcess* theDeuteronInelasticProcess = new G4DeuteronInelasticProcess();
 
-   G4LEDeuteronInelastic* theDeuteronLEPModel = new G4LEDeuteronInelastic();
-   theDeuteronInelasticProcess->RegisterMe(theDeuteronLEPModel);
+   //G4LEDeuteronInelastic* theDeuteronLEPModel = new G4LEDeuteronInelastic();
+   //theDeuteronInelasticProcess->RegisterMe(theDeuteronLEPModel);
    pManager->AddDiscreteProcess(theDeuteronInelasticProcess);
 
    G4VProcess* thedueMultipleScattering = new G4hMultipleScattering();
@@ -158,14 +159,14 @@ void EMMAIonPhysics::ConstructProcess()
 
    // add process
    G4HadronElasticProcess* thetriElasticProcess = new G4HadronElasticProcess();
-   G4LElastic* thetriElasticModel = new G4LElastic();
+   G4HadronElastic* thetriElasticModel = new G4HadronElastic();
    thetriElasticProcess->RegisterMe(thetriElasticModel);
    pManager->AddDiscreteProcess(thetriElasticProcess);
 
    G4TritonInelasticProcess* theTritonInelasticProcess = new G4TritonInelasticProcess();
 
-   G4LETritonInelastic* theTritonLEPModel = new G4LETritonInelastic();
-   theTritonInelasticProcess->RegisterMe(theTritonLEPModel);
+   //G4LETritonInelastic* theTritonLEPModel = new G4LETritonInelastic();
+   //theTritonInelasticProcess->RegisterMe(theTritonLEPModel);
    pManager->AddDiscreteProcess(theTritonInelasticProcess);
 
    G4VProcess* thetriMultipleScattering = new G4hMultipleScattering();
@@ -220,7 +221,7 @@ void EMMAIonPhysics::ConstructProcess()
 
    // add processes
    G4HadronElasticProcess* thehe3ElasticProcess = new G4HadronElasticProcess();
-   G4LElastic* thehe3ElasticModel = new G4LElastic();
+   G4HadronElastic* thehe3ElasticModel = new G4HadronElastic();
    thehe3ElasticProcess->RegisterMe(thehe3ElasticModel);
    pManager->AddDiscreteProcess(thehe3ElasticProcess);
 
@@ -249,7 +250,7 @@ void EMMAIonPhysics::ConstructProcess()
 
 
 
-void EMMAIonPhysics::AddIonGasModels() //NOT USED
+/*void EMMAIonPhysics::AddIonGasModels() //NOT USED
 {
   G4EmConfigurator* em_config = G4LossTableManager::Instance()->EmConfigurator();
   //G4Region* vacuumRegion = G4RegionStore::GetInstance()->GetRegion("vacuumRegion",false);
@@ -262,12 +263,12 @@ void EMMAIonPhysics::AddIonGasModels() //NOT USED
       if(partname == "alpha" || partname == "He3" || partname == "GenericIon") { // what about protons, deuterons and tritons?
 	G4BraggIonGasModel* mod1 = new G4BraggIonGasModel();
 	G4BetheBlochIonGasModel* mod2 = new G4BetheBlochIonGasModel();
-	G4double eth = 2.*MeV*particle->GetPDGMass()/proton_mass_c2;
+	G4double eth = 2.*CLHEP::MeV*particle->GetPDGMass()/proton_mass_c2;
 	em_config->SetExtraEmModel(partname,"ionIoni",mod1,"vacuumRegion",0.0,eth,new G4IonFluctuations());
 	em_config->SetExtraEmModel(partname,"ionIoni",mod2,"vacuumRegion",eth,100*TeV,new G4UniversalFluctuation());
       }
     }
-}
+}*/
 
 
 
@@ -281,7 +282,7 @@ void EMMAIonPhysics::SetReactionParameters() {
 	 << "(" << fZ3 << "," << fA3 << ")+" 
 	 << "(" << fZ4 << "," << fA4 << ")" 
 	 << G4endl;
-  G4cout << "with cross section = " << fcs/millibarn << " mb" << G4endl;
+  G4cout << "with cross section = " << fcs/CLHEP::millibarn << " mb" << G4endl;
   G4cout << G4endl;
 
   theNuclearReactionProcess->Setcs(fcs);

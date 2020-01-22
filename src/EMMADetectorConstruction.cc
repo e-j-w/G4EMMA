@@ -56,6 +56,8 @@
 #include "G4SubtractionSolid.hh"
 #include "G4SystemOfUnits.hh"
 
+#include "G4IonTable.hh"
+
 #include "G4SDManager.hh"
 #include "G4VSensitiveDetector.hh"
 #include "G4RunManager.hh"
@@ -621,7 +623,7 @@ void EMMADetectorConstruction::CalculateScalingFactors()
 
   // rigidities of central trajectory
   G4double excitationEnergy = 0.*keV;
-  G4ParticleDefinition* ic = G4ParticleTable::GetParticleTable()->GetIon(centralZ,centralA,excitationEnergy);
+  G4ParticleDefinition* ic = G4ParticleTable::GetParticleTable()->GetIonTable()->GetIon(centralZ,centralA,excitationEnergy);
 
   G4double mc = centralA*931.4940954;  //(centralZ - centralQ)*0.510998910;
   //G4double mc = ic->GetPDGMass();

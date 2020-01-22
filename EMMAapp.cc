@@ -169,11 +169,7 @@ int main(int argc,char** argv)
   // start interactive session
 #ifdef G4VIS_USE
   G4UImanager* UImanager = G4UImanager::GetUIpointer();
-<<<<<<< HEAD
-  if (vis=="visON") UImanager->ApplyCommand("/control/execute visEMMA.mac");   
-=======
   if (vis=="visON") UImanager->ApplyCommand("/control/execute visEMMA.mac");
->>>>>>> 328d247d31d8d865b2def4e9637587fef9e7941b
   //      UImanager->ApplyCommand("/control/execute BeamSetup.mac");
 
 
@@ -309,13 +305,8 @@ int main(int argc,char** argv)
 #endif
 #ifdef G4UI_USE
   G4UIExecutive* ui = new G4UIExecutive(argc, argv);
-<<<<<<< HEAD
-  //UImanager->ApplyCommand("/control/execute visEMMA.mac"); 
-  //UImanager->ApplyCommand("/control/execute macros/BeamSetup.mac"); 
-=======
   //UImanager->ApplyCommand("/control/execute visEMMA.mac");
   //UImanager->ApplyCommand("/control/execute macros/BeamSetup.mac");
->>>>>>> 328d247d31d8d865b2def4e9637587fef9e7941b
   ui->SessionStart();
   delete ui;
 #endif
