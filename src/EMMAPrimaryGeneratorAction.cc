@@ -168,8 +168,11 @@ void EMMAPrimaryGeneratorAction::energyDistributionInit(G4String fileName) {
 
 	// reading the file somehow lengthens the vector read in by one, with the last entry being written
 	// twice. pop_back just deletes this extraneous entry. Maybe someone who knows C++ better can find out why...
-	energy_v.pop_back();
-	frequency_v.pop_back();
+	if(energy_v.size() > 0){
+    energy_v.pop_back();
+	  frequency_v.pop_back();
+  }
+  
 
 	nPoints = energy_v.size();
 
@@ -307,6 +310,12 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 			//deltaTargetEkin = maxTargetEkin - minTargetEkin;
 
 		}
+
+    if(Ekin <= 0){
+      printf("ERROR: kinetic energy of the beam is zero or negative, check that energy parameters are properly set up.\n");
+      return;
+    }
+
 		//energy including spread
     particleGun->SetParticleEnergy(Ekin *MeV);
 
@@ -344,10 +353,12 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     G4double MaxAngle = 0.0*deg;
     if (rmax>0) {
       MaxAngle = transEmittance/(gamma*beta*rmax);
-      MaxAngle = MaxAngle * 180./CLHEP::pi/1000. * deg; // mrad to deg conversion
+      MaxAngle = MaxAngle * 180./CLHEP::pi/1000. * CLHEP::deg; // mrad to deg conversion
     }
-	G4cout << "RADIUS: " << rmax/mm << " mm" << G4endl;
-        G4cout << "ANGLE: " << MaxAngle/deg << " deg" << G4endl;
+	G4cout << "RADIUS: " << rmax/CLHEP::mm << " mm" << G4endl;
+        G4cout << "ANGLE: " << MaxAngle/CLHEP::deg << " deg" << G4endl;
+
+    //G4cout << "Etot: " << Etot << ", mass: " << mass << ", gamma: " << gamma << ", beta: " << beta << G4endl;
 
     // Sample angle
     G4double x=0., y=0., z=1.;

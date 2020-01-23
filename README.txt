@@ -4,6 +4,11 @@ cmake -DGeant4_DIR=/path/to/geant4/installation/ /path/to/G4EMMA
 make
 
 
+Running the program
+
+/control/execute path/to/macro.mac
+
+
 Some nominal values for EMMA: 
 
 Energy acceptance: +25% -17%
