@@ -50,10 +50,13 @@ root -l GEMMArootanalysis_v1.C
 
 ## Some nominal values for EMMA: 
 
-Energy acceptance: +25% -17%
-m/q acceptance: +/- 3.5%
-mass dispersion in focal plane: 10 mm/%
-angular acceptance: +/- 3.6 deg by +/- 3.6 deg (15 msr)
+**Energy acceptance:** +25% -17%
+
+**m/q acceptance:** +/- 3.5%
+
+**Mass dispersion in focal plane:** 10 mm/%
+
+**Angular acceptance:** +/- 3.6 deg by +/- 3.6 deg (15 msr)
 
 
 ## Functionality/Usage changes updates: 
